@@ -1,1 +1,21 @@
 
+/// Table extension for CustTable to enforce custom business rules.
+[ExtensionOf(tableStr(CustTable))]
+public final class CustTable_MyCompany_Extension
+{
+    public boolean validateWrite()
+    {
+        boolean isValid;
+
+        isValid = next validateWrite();
+
+        if (isValid)
+        {
+            if (this.TaxVATNum && strLen(this.TaxVATNum) != 10)
+            {
+                isValid = checkFailed("Validation failed: Tax ID (کد اقتصادی) must be exactly 10 digits.");
+            }
+        }
+        return isValid;
+    }
+}

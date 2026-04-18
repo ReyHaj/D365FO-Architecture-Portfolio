@@ -1,1 +1,55 @@
+/// <summary>
+/// Data Entity extension for CustCustomerV3Entity.
+/// Handles API/OData specific business logic and default mappings for external integrations.
+/// </summary>
+[ExtensionOf(tableStr(CustCustomerV3Entity))]
+public final class CustCustomerV3Entity_MyCompany_Extension
+{
+    /// <summary>
+    /// Extends the standard defaultRow method.
+    /// This method is triggered when a new record is initialized via OData or Data Management.
+    /// </summary>
+    public void defaultRow()
+    {
+        // 1. Always allow standard Microsoft initializations to run first.
+        next defaultRow();
 
+        // 2. Mid-level Signature: Defensive Defaulting for API payloads.
+        // If the external system (e.g., E-commerce website) did not provide a Customer Group, 
+        // we assign a default web customer group to prevent database insertion errors.
+        if (!this.CustomerGroupId)
+        {
+            // Note: 'WebCust' should ideally be fetched from a parameter table, 
+            // but is hardcoded here for demonstration purposes.
+            this.CustomerGroupId = 'WebCust'; 
+        }
+
+        // 3. Ensure the currency is populated using the company's accounting currency if missing.
+        if (!this.SalesCurrencyCode)
+        {
+            this.SalesCurrencyCode = Ledger::accountingCurrency(CompanyInfo::current());
+        }
+    }
+
+    /// <summary>
+    /// Extends the entity-level validateWrite method.
+    /// Acts as the first line of defense before the data even reaches the CustTable.
+    /// </summary>
+    /// <returns>True if validation passes; otherwise, false.</returns>
+    public boolean validateWrite()
+    {
+        boolean isValid = next validateWrite();
+
+        if (isValid)
+        {
+            // Example of Entity-specific validation:
+            // Ensure that external systems always provide an email address for web customers.
+            if (this.CustomerGroupId == 'WebCust' && !this.PrimaryContactEmail)
+            {
+                isValid = checkFailed("Validation failed: An email address is mandatory for Web Customers.");
+            }
+        }
+
+        return isValid;
+    }
+}

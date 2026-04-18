@@ -1,21 +1,36 @@
-
+/// <summary>
 /// Table extension for CustTable to enforce custom business rules.
+/// </summary>
 [ExtensionOf(tableStr(CustTable))]
 public final class CustTable_MyCompany_Extension
 {
+    /// <summary>
+    /// Extends the standard validateWrite to enforce Tax ID length validation.
+    /// </summary>
+    /// <returns>
+    /// True if the record is valid and ready to save; otherwise, false.
+    /// </returns>
     public boolean validateWrite()
     {
         boolean isValid;
 
+        // 1. First, we execute the standard Microsoft code and store the result.
         isValid = next validateWrite();
 
+        // 2. Mid-level signature: We only check our custom rules if Microsoft's standard validation passes!
+        // If the standard validation already failed, we avoid wasting server resources.
         if (isValid)
         {
+            // 3. Checking the business rule: Is the field populated? And is its length not equal to 10?
             if (this.TaxVATNum && strLen(this.TaxVATNum) != 10)
             {
-                isValid = checkFailed("Validation failed: Tax ID (کد اقتصادی) must be exactly 10 digits.");
+                // 4. Using checkFailed instead of throwing a harsh exception (throw error).
+                // (In real-world projects, we use System Labels like "@MyCompany: TaxIdError" instead of hardcoded text)
+                isValid = checkFailed("Validation failed: Tax ID must be exactly 10 digits.");
             }
         }
+
+        // 5. Returning the final result to the system.
         return isValid;
     }
 }

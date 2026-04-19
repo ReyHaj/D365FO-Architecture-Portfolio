@@ -62,6 +62,9 @@ JSON
 }
 
 (Note: CustomerGroupId and SalesCurrencyCode are intentionally omitted to demonstrate the Entity's auto-defaulting capabilities).
+
+---
+
 ** Technical Q&A 
 Q: Why enforce the Email rule on the Entity instead of the Table?
 
@@ -74,6 +77,8 @@ A: The sender parameter is of type Common. Direct assignment is risky and can le
 Q: Why capture the result of next validateWrite() into a boolean variable first?
 
 A: Performance optimization. If a user forgets a standard mandatory field (like Name), Microsoft's standard validation fails and returns false. By checking if (isValid) before executing custom logic, we prevent the CPU from running unnecessary string length calculations on a record that is already destined to be rejected.
+
+---
 
 ## Deployment Instructions
 To review or execute this code in a Dev Environment:

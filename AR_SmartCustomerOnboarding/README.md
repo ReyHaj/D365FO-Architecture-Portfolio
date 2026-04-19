@@ -65,7 +65,8 @@ JSON
 
 ---
 
-** Technical Q&A 
+## Technical Q&A  
+
 Q: Why enforce the Email rule on the Entity instead of the Table?
 
 A: The business rule specifies that emails are mandatory only for web customers. Placing this rule on the CustTable would disrupt internal employees who manually create customers without immediate access to an email address. The Entity acts as the specific boundary for integration data.

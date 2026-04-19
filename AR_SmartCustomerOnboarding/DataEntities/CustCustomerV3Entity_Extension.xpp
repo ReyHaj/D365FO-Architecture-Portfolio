@@ -3,7 +3,7 @@
     /// Handles API/OData specific business logic and default mappings for external integrations.
     /// </summary>
 
-[ExtensionOf(tableStr(CustCustomerV3Entity))]
+```csharp [ExtensionOf(tableStr(CustCustomerV3Entity))]
 public final class CustCustomerV3Entity_MyCompany_Extension
 {
     /// <summary>

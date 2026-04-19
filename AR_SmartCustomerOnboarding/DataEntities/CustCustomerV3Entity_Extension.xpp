@@ -14,7 +14,7 @@ public final class CustCustomerV3Entity_MyCompany_Extension
         // 1. Always allow standard Microsoft initializations to run first.
         next defaultRow();
 
-        // 2. Mid-level Signature: Defensive Defaulting for API payloads.
+        // 2.  Defensive Defaulting for API payloads.
         // If the external system (e.g., E-commerce website) did not provide a Customer Group, 
         // we assign a default web customer group to prevent database insertion errors.
         if (!this.CustomerGroupId)

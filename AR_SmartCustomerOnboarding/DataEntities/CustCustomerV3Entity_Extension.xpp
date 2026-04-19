@@ -1,7 +1,7 @@
-/// <summary>
-/// Data Entity extension for CustCustomerV3Entity.
-/// Handles API/OData specific business logic and default mappings for external integrations.
-/// </summary>
+    /// <summary>
+    /// Data Entity extension for CustCustomerV3Entity.
+    /// Handles API/OData specific business logic and default mappings for external integrations.
+    /// </summary>
 [ExtensionOf(tableStr(CustCustomerV3Entity))]
 public final class CustCustomerV3Entity_MyCompany_Extension
 {

@@ -53,12 +53,14 @@ Endpoint: [D365_Environment_URL]/data/CustCustomerV3Entities
 JSON Payload:
 
 JSON
+
 {
   "CustomerAccount": "CUST-9001",
   "OrganizationName": "Novin Tech Solutions",
   "PrimaryContactEmail": "info@novin-tech.com",
   "TaxVATNum": "1234567890" 
 }
+
 (Note: CustomerGroupId and SalesCurrencyCode are intentionally omitted to demonstrate the Entity's auto-defaulting capabilities).
 ** Technical Q&A 
 Q: Why enforce the Email rule on the Entity instead of the Table?

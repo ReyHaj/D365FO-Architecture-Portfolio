@@ -28,7 +28,7 @@ public final class CustCustomerV3Entity_MyCompany_Extension
         // 3. Ensure the currency is populated using the company's accounting currency if missing.
         if (!this.SalesCurrencyCode)
         {
-            this.SalesCurrencyCode = Ledger::accountingCurrency(CompanyInfo::current());
+            this.SalesCurrencyCode = 'USD';
         }
     }
 

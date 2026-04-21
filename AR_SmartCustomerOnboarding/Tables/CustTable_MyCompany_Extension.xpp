@@ -22,7 +22,7 @@ public final class CustTable_MyCompany_Extension
         if (isValid)
         {
             // 3. Checking the business rule: Is the field populated? And is its length not equal to 10?
-            if (this.TaxVATNum && strLen(this.TaxVATNum) != 10)
+            if (this.VATNum && strLen(this.VATNum) != 10)
             {
                 // 4. Using checkFailed instead of throwing a harsh exception (throw error).
                 // (In real-world projects, we use System Labels like "@MyCompany: TaxIdError" instead of hardcoded text)

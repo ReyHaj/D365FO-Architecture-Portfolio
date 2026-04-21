@@ -4,13 +4,11 @@ public final class CustCustomerV3Entity_MyCompany_Extension
 {
     public void defaultRow()
     {
-        // 1. Always allow standard Microsoft initializations to run first.
         next defaultRow();
 
         if (!this.CustomerGroupId)
         {
-            // Note: 'WebCust' should ideally be fetched from a parameter table, 
-            // but is hardcoded here for demonstration purposes.
+        
             this.CustomerGroupId = 'WebCust'; 
         }
 

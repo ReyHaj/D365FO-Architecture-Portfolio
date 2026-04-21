@@ -1,27 +1,16 @@
-/// <summary>
-/// Event handler class for CustTable to manage decoupled side-effects (e.g., Notifications, Integrations).
-/// </summary>
+
 public final class CustTable_EventHandler
 {
-    /// <summary>
-    /// Triggers immediately AFTER a new customer is successfully inserted into the database.
-    /// Safely handles post-insert business logic without blocking the main database transaction.
-    /// </summary>
-    /// <param name="sender">The record that triggered the event.</param>
-    /// <param name="e">Event arguments.</param>
+
     [DataEventHandler(tableStr(CustTable), DataEventType::Inserted)]
     public static void CustTable_onInserted(Common sender, DataEventArgs e)
     {
         CustTable custTable;
 
-        // 1. Safe Type-Casting: Converting the generic 'Common' buffer to 'CustTable'
         custTable = sender as CustTable;
 
-        // 2. Defensive Programming: Ensure the cast was successful and the record is valid
         if (custTable && custTable.AccountNum)
         {
-            // 3. Decoupled Business Logic: Triggering the notification
-            // Note: In a production environment, this would call an external API or Email framework.
             info(strFmt("Success: Welcome notification queued for new customer [%1] - %2", 
                         custTable.AccountNum, 
                         custTable.name()));

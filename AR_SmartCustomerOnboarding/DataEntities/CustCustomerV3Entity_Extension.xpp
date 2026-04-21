@@ -18,19 +18,13 @@ public final class CustCustomerV3Entity_MyCompany_Extension
         }
     }
 
-    /// <summary>
-    /// Extends the entity-level validateWrite method.
-    /// Acts as the first line of defense before the data even reaches the CustTable.
-    /// </summary>
-    /// <returns>True if validation passes; otherwise, false.</returns>
     public boolean validateWrite()
     {
         boolean isValid = next validateWrite();
 
         if (isValid)
         {
-            // Example of Entity-specific validation:
-            // Ensure that external systems always provide an email address for web customers.
+
             if (this.CustomerGroupId == 'WebCust' && !this.PrimaryContactEmail)
             {
                 isValid = checkFailed("Validation failed: An email address is mandatory for Web Customers.");

@@ -1,22 +1,15 @@
-[ExtensionOf(tableStr(CustTable))]
-public final class CustTable_MyCompany_Extension(Common sender, DataEventArgs e)
+[ExtensionOf(tableStr(TaxRegistration))]
+public final class TaxRegistration_MyCompany_Extension
 {
-    TaxRegistration taxReg = sender as TaxRegistration;
     public boolean validateWrite()
     {
-        info(">>> My Custom Code is Running! <<<");
-
         boolean isValid = next validateWrite();
 
-        
-    if (taxReg && taxReg.RegistrationNumber)
-    {
-        if (strLen(taxReg.RegistrationNumber) != 10)
+        if (this.RegistrationNumber && strLen(this.RegistrationNumber) != 10)
         {
-            checkFailed("Error: Tax exempt number must be exactly 10 digits.");
-            isValid = false;
+            isValid = checkFailed("Error: The Registration ID must be exactly 10 digits.");
         }
-    }
+
         return isValid;
     }
 }

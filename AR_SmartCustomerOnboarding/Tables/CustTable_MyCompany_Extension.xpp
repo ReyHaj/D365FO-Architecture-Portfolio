@@ -1,4 +1,4 @@
-// ۱. هدف‌گیریِ دقیقِ Data Source مربوط به مشتری (CustTable)
+
 [ExtensionOf(formDataSourceStr(DirPartyQuickCreateForm, CustTable))]
 public final class DirPartyQuickCreateForm_CustTable_Extension
 {

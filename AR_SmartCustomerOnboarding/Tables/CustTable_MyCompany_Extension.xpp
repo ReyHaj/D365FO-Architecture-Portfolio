@@ -1,13 +1,20 @@
-[ExtensionOf(tableStr(TaxRegistration))]
-public final class TaxRegistration_MyCompany_Extension
+// ۱. هدف‌گیریِ دقیقِ Data Source مربوط به مشتری (CustTable)
+[ExtensionOf(formDataSourceStr(DirPartyQuickCreateForm, CustTable))]
+public final class DirPartyQuickCreateForm_CustTable_Extension
 {
     public boolean validateWrite()
     {
+      
         boolean isValid = next validateWrite();
 
-        if (this.RegistrationNumber && strLen(this.RegistrationNumber) != 10)
+
+        CustTable custTableRecord = this.cursor();
+
+         
+        if (custTableRecord.VATNum && strLen(custTableRecord.VATNum) != 10)
         {
-            isValid = checkFailed("Error: The Registration ID must be exactly 10 digits.");
+        
+            isValid = checkFailed("Error: Tax exempt number must be exactly 10 digits.");
         }
 
         return isValid;

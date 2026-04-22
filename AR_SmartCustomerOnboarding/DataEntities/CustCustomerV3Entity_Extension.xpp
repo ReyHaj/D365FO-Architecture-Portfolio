@@ -1,38 +1,13 @@
-[ExtensionOf(tableStr(CustCustomerV3Entity))]
-public final class CustCustomerV3Entity_MyCompany_Extension
+[ExtensionOf(tableStr(TaxRegistration))]
+final class TaxRegistration_Extension
 {
-    public void defaultRow()
-    {
-        next defaultRow();
-
-        if (!this.CustomerGroupId)
-        {
-            this.CustomerGroupId = 'WebCust'; 
-        }
-
-        if (!this.SalesCurrencyCode)
-        {
-            this.SalesCurrencyCode = 'USD';
-        }
-    }
-
     public boolean validateWrite()
     {
         boolean isValid = next validateWrite();
 
-        if (isValid)
+        if (this.RegistrationNumber && strLen(this.RegistrationNumber) != 10)
         {
-            // ✅ Validation قبلی (Email)
-            if (this.CustomerGroupId == 'WebCust' && !this.PrimaryContactEmail)
-            {
-                isValid = checkFailed("Validation failed: An email address is mandatory for Web Customers.");
-            }
-
-            // ✅ Validation جدید (Tax Exempt Number)
-            if (this.VATNum && strLen(this.VATNum) != 10)
-            {
-                isValid = checkFailed("Error: Tax exempt number must be exactly 10 digits.");
-            }
+            isValid = checkFailed("Tax exempt number must be exactly 10 digits.");
         }
 
         return isValid;

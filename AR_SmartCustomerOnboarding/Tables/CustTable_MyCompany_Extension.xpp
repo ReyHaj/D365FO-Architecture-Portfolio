@@ -1,22 +1,23 @@
-
-[ExtensionOf(formDataSourceStr(DirPartyQuickCreateForm, CustTable))]
+// هدف‌گیریِ کلِ فرم (این خط ارورِ دیتاسورس را برای همیشه از بین می‌برد)
+[ExtensionOf(formStr(DirPartyQuickCreateForm))]
 public final class DirPartyQuickCreateForm_CustTable_Extension
 {
-    public boolean validateWrite()
+    // متد canClose برای جلوگیری از بسته شدن و ذخیره شدن فرم
+    public boolean canClose()
     {
-      
-        boolean isValid = next validateWrite();
+        boolean canCloseForm = next canClose();
 
-
-        CustTable custTableRecord = this.cursor();
-
-         
-        if (custTableRecord.VATNum && strLen(custTableRecord.VATNum) != 10)
+        if (canCloseForm)
         {
-        
-            isValid = checkFailed("Error: Tax exempt number must be exactly 10 digits.");
+            // پیدا کردن کادر متنی با استفاده از نامی که خودتان کشف کردید
+            FormStringControl vatControl = this.design().controlName("DynamicDetail_VATNum");
+
+            if (vatControl && vatControl.text() && strLen(vatControl.text()) != 10)
+            {
+                canCloseForm = checkFailed("Error: Tax exempt number must be exactly 10 digits.");
+            }
         }
 
-        return isValid;
+        return canCloseForm;
     }
 }

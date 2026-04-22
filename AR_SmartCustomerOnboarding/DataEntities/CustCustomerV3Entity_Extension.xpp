@@ -1,4 +1,3 @@
- 
 [ExtensionOf(tableStr(CustCustomerV3Entity))]
 public final class CustCustomerV3Entity_MyCompany_Extension
 {
@@ -8,7 +7,6 @@ public final class CustCustomerV3Entity_MyCompany_Extension
 
         if (!this.CustomerGroupId)
         {
-        
             this.CustomerGroupId = 'WebCust'; 
         }
 
@@ -24,14 +22,19 @@ public final class CustCustomerV3Entity_MyCompany_Extension
 
         if (isValid)
         {
-
+            // ✅ Validation قبلی (Email)
             if (this.CustomerGroupId == 'WebCust' && !this.PrimaryContactEmail)
             {
                 isValid = checkFailed("Validation failed: An email address is mandatory for Web Customers.");
+            }
+
+            // ✅ Validation جدید (Tax Exempt Number)
+            if (this.VATNum && strLen(this.VATNum) != 10)
+            {
+                isValid = checkFailed("Error: Tax exempt number must be exactly 10 digits.");
             }
         }
 
         return isValid;
     }
 }
-

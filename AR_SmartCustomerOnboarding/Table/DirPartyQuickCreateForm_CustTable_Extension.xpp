@@ -1,23 +1,20 @@
-// هدف‌گیریِ کلِ فرم (این خط ارورِ دیتاسورس را برای همیشه از بین می‌برد)
 [ExtensionOf(formStr(DirPartyQuickCreateForm))]
-public final class DirPartyQuickCreateForm_CustTable_Extension
+public final class DirPartyQuickCreateForm_MyCompany_Extension
 {
-    // متد canClose برای جلوگیری از بسته شدن و ذخیره شدن فرم
-    public boolean canClose()
+    // این متد دقیقاً وقتی دکمه Save (یا OK) زده می‌شود بیدار می‌شود
+    public void closeOk()
     {
-        boolean canCloseForm = next canClose();
+        // پیدا کردن کادر متنی با اسم دقیقش
+        FormStringControl vatControl = this.design().controlName("DynamicDetail_VATNum");
 
-        if (canCloseForm)
+        // استفاده از valueStr() که مقدار واقعی و قفل‌شده‌ی کادر را می‌خواند
+        if (vatControl && vatControl.valueStr() != "" && strLen(vatControl.valueStr()) != 10)
         {
-            // پیدا کردن کادر متنی با استفاده از نامی که خودتان کشف کردید
-            FormStringControl vatControl = this.design().controlName("DynamicDetail_VATNum");
-
-            if (vatControl && vatControl.text() && strLen(vatControl.text()) != 10)
-            {
-                canCloseForm = checkFailed("Error: Tax exempt number must be exactly 10 digits.");
-            }
+            // پرتاب ارور! این دستور مثل ترمز دستی عمل می‌کند و کل فرآیند را در جا متوقف می‌کند
+            throw error("Error: Tax exempt number must be exactly 10 digits.");
         }
 
-        return canCloseForm;
+        // اگر اروری پرتاب نشد (یعنی کد 10 رقمی بود یا خالی بود)، اجازه بده فرم کارش را بکند
+        next closeOk();
     }
 }

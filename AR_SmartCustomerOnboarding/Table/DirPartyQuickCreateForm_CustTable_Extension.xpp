@@ -1,13 +1,21 @@
+
 [ExtensionOf(formStr(DirPartyQuickCreateForm))]
 public final class DirPartyQuickCreateForm_MyCompany_Extension
 {
+   
     public void closeOk()
     {
+       
         FormStringControl vatControl = this.design().controlName("DynamicDetail_VATNum");
-
+  
+       
         if (vatControl && vatControl.valueStr() != "" && strLen(vatControl.valueStr()) != 10)
-        {            throw error("Error: Tax exempt number must be exactly 10 digits.");
+        {
+            
+            throw error("Error: Tax exempt number must be exactly 10 digits.");
         }
+  
         next closeOk();
     }
+  
 }

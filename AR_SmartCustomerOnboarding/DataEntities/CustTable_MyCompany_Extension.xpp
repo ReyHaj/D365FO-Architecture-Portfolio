@@ -1,0 +1,16 @@
+[ExtensionOf(tableStr(CustTable))]
+public final class CustTable_MyCompany_Extension
+{
+    public boolean validateWrite()
+    {
+       
+        boolean isValid = next validateWrite();
+
+        if (isValid && this.VATNum && strLen(this.VATNum) != 10)
+        {
+            isValid = checkFailed("Error: Tax exempt number must be exactly 10 digits.");
+        }
+
+        return isValid;
+    }
+}

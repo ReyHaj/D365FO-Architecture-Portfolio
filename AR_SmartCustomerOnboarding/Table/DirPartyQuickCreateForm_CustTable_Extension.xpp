@@ -1,20 +1,13 @@
 [ExtensionOf(formStr(DirPartyQuickCreateForm))]
 public final class DirPartyQuickCreateForm_MyCompany_Extension
 {
-    // این متد دقیقاً وقتی دکمه Save (یا OK) زده می‌شود بیدار می‌شود
     public void closeOk()
     {
-        // پیدا کردن کادر متنی با اسم دقیقش
         FormStringControl vatControl = this.design().controlName("DynamicDetail_VATNum");
 
-        // استفاده از valueStr() که مقدار واقعی و قفل‌شده‌ی کادر را می‌خواند
         if (vatControl && vatControl.valueStr() != "" && strLen(vatControl.valueStr()) != 10)
-        {
-            // پرتاب ارور! این دستور مثل ترمز دستی عمل می‌کند و کل فرآیند را در جا متوقف می‌کند
-            throw error("Error: Tax exempt number must be exactly 10 digits.");
+        {            throw error("Error: Tax exempt number must be exactly 10 digits.");
         }
-
-        // اگر اروری پرتاب نشد (یعنی کد 10 رقمی بود یا خالی بود)، اجازه بده فرم کارش را بکند
         next closeOk();
     }
 }

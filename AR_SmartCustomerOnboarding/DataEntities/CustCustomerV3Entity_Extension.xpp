@@ -1,5 +1,5 @@
 [ExtensionOf(tableStr(TaxRegistration))]
-final class TaxRegistration_Extension
+public final class TaxRegistration_Extension
 {
     public boolean validateWrite()
     {

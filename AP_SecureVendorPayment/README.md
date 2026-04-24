@@ -27,18 +27,14 @@ By extending the validateWrite() method on the table level, we ensure the rule i
 The validation acts as a gatekeeper in the following data flow:
 
 ```mermaid
-Trigger: Data is sent to LedgerJournalTrans via OData API, Data Entities, or Manual Entry.
-
-Execution: The next validateWrite() is called (Standard MS logic).
-
-Custom Logic: Our Extension checks:
-
-Is the AccountType == Vendor?
-
-Is the PaymMode (Method of Payment) empty?
-
-Outcome: If criteria match, a checkFailed warning is issued, and the SQL transaction is aborted.
-
+graph TD
+    A([📥 Trigger: Data Entry via OData / UI]) --> B[⚙️ Execution: next validateWrite]
+    B --> C{🔍 Custom Extension:<br>AccountType == Vendor?<br>AND PaymMode is Empty?}
+    C -- YES --> D[⛔ Outcome: checkFailed<br>SQL Transaction Aborted]
+    C -- NO --> E([✅ Outcome: Validation Passed<br>Record Saved])
+    
+    style D fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#000000
+    style E fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000000
 ```
 
 ---

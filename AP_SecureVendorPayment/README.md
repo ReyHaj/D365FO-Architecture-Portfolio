@@ -19,6 +19,7 @@ Reasoning: By extending the validateWrite() method on the table level, we ensure
 ## 3. Integration Workflow
 The validation acts as a gatekeeper in the following data flow:
 
+```mermaid
 Trigger: Data is sent to LedgerJournalTrans via OData API, Data Entities, or Manual Entry.
 
 Execution: The next validateWrite() is called (Standard MS logic).
@@ -30,6 +31,9 @@ Is the AccountType == Vendor?
 Is the PaymMode (Method of Payment) empty?
 
 Outcome: If criteria match, a checkFailed warning is issued, and the SQL transaction is aborted.
+
+```mermaid
+
 ---
 ## 4. API Test Payload (OData)
 To test this validation via integration (e.g., Postman), use the following JSON for the VendorPaymentJournalLines entity:

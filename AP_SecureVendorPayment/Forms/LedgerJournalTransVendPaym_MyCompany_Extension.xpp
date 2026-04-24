@@ -8,9 +8,6 @@ public final class LedgerJournalTransVendPaym_MyCompany_Extension
 
         FormDataSource journalTransDS = this.dataSource(formDataSourceStr(LedgerJournalTransVendPaym, LedgerJournalTrans));
         
-        if (journalTransDS)
-        {
-            journalTransDS.object(fieldNum(LedgerJournalTrans, PaymMode)).mandatory(true);
-        }
+      
     }
 }

@@ -1,0 +1,18 @@
+[ExtensionOf(tableStr(LedgerJournalTrans))]
+public final class LedgerJournalTrans_GL_Extension
+{
+    public boolean validateWrite()
+    {
+        boolean isValid = next validateWrite();
+
+       
+        if (isValid && 
+            this.AccountType == LedgerJournalACType::Ledger && 
+            this.Txt == "")
+        {
+            isValid = checkFailed("Audit Alert: A description is mandatory for all General Ledger transactions to ensure compliance.");
+        }
+
+        return isValid;
+    }
+}

@@ -1,8 +1,9 @@
  AP_SecureVendorPayment: Financial Integrity & Payment Security
- 
+ ---
 This project implements a critical security layer within the Accounts Payable (AP) module of Dynamics 365 Finance & Operations. It ensures that no vendor payment can be processed or saved without a verified Method of Payment, preventing financial leakage and ensuring audit compliance.
----
+
  1. Business Requirement
+---
 In large-scale enterprise environments, payments to vendors must be traceable and categorized (e.g., Electronic, Check, or Wire).
 
 The Problem: Users often forget to select a "Method of Payment" in the Vendor Payment Journal, leading to reconciliation errors and incomplete bank exports.

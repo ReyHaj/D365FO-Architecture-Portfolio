@@ -48,6 +48,7 @@ To test this validation via integration (e.g., Postman), use the following JSON 
 JSON Payload:
 
 JSON
+
 {
     "JournalBatchNumber": "VNP00045",
     "LineNumber": 1,

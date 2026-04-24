@@ -1,0 +1,30 @@
+public class VendPaymAudit_Action
+{
+    public static void main(Args _args)
+    {
+        LedgerJournalTrans  journalTrans;
+        LedgerJournalTable  journalTable;
+        int                 errorCount = 0;
+
+        if (!_args || !_args.record() || _args.record().TableId != tableNum(LedgerJournalTable))
+        {
+            throw error("Please run this tool from a valid Journal header.");
+        }
+
+        journalTable = _args.record();
+
+        while select journalTrans
+            where journalTrans.JournalNum == journalTable.JournalNum
+               && journalTrans.AccountType == LedgerJournalACType::Vend
+               && journalTrans.PaymMode == ""
+        {
+            error(strFmt("Audit Failed: Voucher %1 is missing a Method of Payment.", journalTrans.Voucher));
+            errorCount++;
+        }
+
+        if (errorCount == 0)
+        {
+            info("Audit Passed: All vendor lines in this journal have a valid Method of Payment.");
+        }
+    }
+}

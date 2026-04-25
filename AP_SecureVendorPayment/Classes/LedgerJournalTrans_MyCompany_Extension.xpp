@@ -1,0 +1,15 @@
+[ExtensionOf(tableStr(LedgerJournalTrans))]
+public final class LedgerJournalTrans_MyCompany_Extension
+{
+    public boolean validateWrite()
+    {
+        boolean isValid = next validateWrite();
+
+        if (isValid && this.AccountType == LedgerJournalACType::Vend && !this.PaymMode)
+        {
+            isValid = checkFailed("Security Alert: You cannot process a vendor payment without selecting a 'Method of Payment'.");
+        }
+
+        return isValid;
+    }
+}

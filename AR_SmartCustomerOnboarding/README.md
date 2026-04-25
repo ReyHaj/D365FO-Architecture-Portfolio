@@ -56,8 +56,8 @@ JSON
 
 {
   "CustomerAccount": "CUST-9001",
-  "OrganizationName": "Novin Tech Solutions",
-  "PrimaryContactEmail": "info@novin-tech.com",
+  "OrganizationName": "Rey Haj",
+  "PrimaryContactEmail": "rey.haj@hotmail.com",
   "TaxVATNum": "1234567890" 
 }
 
